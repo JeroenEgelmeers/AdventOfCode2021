@@ -11,23 +11,23 @@ public class Day1Controller extends DayController<Integer, Integer> {
         super(filePath);
     }
 
+    private final List<Integer> input = new DayFileReader().fileToIntegerList(FILEPATH, "\\s+");
+
     @Override
     public Integer solutionPartOne() {
-        List<Integer> input = new DayFileReader().fileToIntegerList(FILEPATH, "\\s+");
         return (int) IntStream.range(1, input.size()).filter(i -> input.get(i - 1) < input.get(i)).count();
     }
 
     @Override
     public Integer solutionPartTwo() {
-        List<Integer> input = new DayFileReader().fileToIntegerList(FILEPATH, "\\s+");
-        return (int) IntStream.range(3, input.size()).filter(i -> verifyWindow(input, i)).count();
+        return (int) IntStream.range(3, input.size()).filter(this::verifyWindow).count();
     }
 
-    private boolean verifyWindow(List<Integer> input, int i) {
-        return getSumFromWindow(input, i - 3, i - 1) < getSumFromWindow(input, i - 2, i);
+    private boolean verifyWindow(int i) {
+        return getSumFromWindow(i - 3, i - 1) < getSumFromWindow(i - 2, i);
     }
 
-    public Integer getSumFromWindow(List<Integer> input, int from, int to) {
+    private Integer getSumFromWindow(int from, int to) {
         return input.subList(from, to + 1).stream().mapToInt(Integer::intValue).sum();
     }
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tests.java.helpers.DayTestInterface;
 
-
 public class Day1ControllerTest implements DayTestInterface {
 
     @Test
